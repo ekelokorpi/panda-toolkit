@@ -1,0 +1,17 @@
+{
+  "name": "pandajs",
+  "version": "1.0.0",
+  "description": "Panda.js node toolkit",
+  "main": "panda.js",
+  "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekelokorpi/panda.js-npm.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "uglify-js": "~2.4.13",
+    "express": "~3.4.8"
+  },
+  "bin": "./panda.js"
+}
