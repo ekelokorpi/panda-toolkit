@@ -1,10 +1,10 @@
-### Panda.js node toolkit
+## Panda.js node toolkit
 
-## Install
+### Install
 
     $ npm install -g pandajs
 
-## Usage
+### Usage
     
 Build Panda.js game
 
