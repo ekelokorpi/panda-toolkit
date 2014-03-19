@@ -6,7 +6,7 @@ var configFile = process.argv[3] || 'src/game/config.js';
 try {
     require(process.cwd() + '/' + configFile);
 } catch(e) {
-    return console.log('Error reading config file.');
+    return console.log('Error reading config file.'.error);
 }
 console.log('Using config ' + configFile);
 
@@ -34,7 +34,7 @@ game.require = function() {
 };
 game.body = function() {};
 
-console.log('Building...');
+console.log('Building...'.title);
 
 for (i = 0; i < include.length; i++) {
     require(dir + include[i]);
@@ -45,11 +45,11 @@ for (i = 0; i < game.modules.length; i++) {
     game.modules[i] = dir + game.modules[i];
     size = fs.statSync(game.modules[i]).size;
     totalSize += size;
-    console.log(file + ' ' + size + ' bytes');
+    console.log(file.file + ' ' + (size.toString()).number + ' bytes');
 }
 if(configFile) game.modules.unshift(configFile);
 
-console.log('Total ' + totalSize + ' bytes');
+console.log('Total ' + (totalSize.toString()).number + ' bytes');
 
 result = UglifyJS.minify(game.modules);
 
@@ -71,6 +71,6 @@ fs.writeFile(pandaConfig.outputFile, output, function(err) {
     else {
         var size = fs.statSync(pandaConfig.outputFile).size;
         var percent = Math.round((size / totalSize) * 100);
-        console.log('Saved ' + pandaConfig.outputFile + ' ' + size + ' bytes (' + percent + '%)');
+        console.log('Saved ' + pandaConfig.outputFile.file + ' ' + (size.toString()).number + ' bytes (' + percent + '%)');
     }
 });
