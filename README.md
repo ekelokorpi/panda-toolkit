@@ -10,16 +10,24 @@
 
 ### Commands
 
-- `build [configFile]` Build game
+- `build` Build game
 
-    - _configFile_ Filename of config file _(default: src/game/config.js)_
+    Parameters:
+    
+    - `configFile` Filename of config file _(src/game/config.js)_
 
-- `offline [cacheFile] [gameFile] [mediaDir]` Create cache manifest
+- `offline` Create cache manifest
 
-    - _cacheFile_ Filename of cache file _(default: game.cache)_
-    - _gameFile_ Filename of game file _(default: game.min.js)_
-    - _mediaDir_ Directory of media files _(default: media)_
+    Parameters:
 
-- `server [port]` Start local web server
+     - `cacheFile` Filename of cache file _(game.cache)_
+    
+     - `gameFile` Filename of game file _(game.min.js)_
+    
+     - `mediaDir` Directory of media files _(media)_
 
-    - _port_ Server port _(default: 5975)_
+- `server` Start local web server
+
+    Parameters:
+
+    - `port` Server port _(5975)_
