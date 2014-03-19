@@ -6,6 +6,7 @@ colors.setTheme({
     file: 'magenta',
     number: 'cyan',
     title: 'yellow',
+    valid: 'green',
     error: 'red',
     command: 'magenta',
     parameter: 'grey'
@@ -14,6 +15,7 @@ colors.setTheme({
 if(process.argv[2] === 'build') return require('./build.js');
 if(process.argv[2] === 'server') return require('./server.js');
 if(process.argv[2] === 'offline') return require('./offline.js');
+if(process.argv[2] === 'test') return require('./test.js');
 if(process.argv[2] === 'version') {
     var data = require('./package.json');
     return console.log(data.version.number);
