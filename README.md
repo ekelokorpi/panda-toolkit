@@ -2,7 +2,7 @@
 
 ### Install
 
-    $ npm install -g pandajs
+    $ npm install pandajs -g
 
 ### Usage
     

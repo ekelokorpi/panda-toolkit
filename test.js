@@ -81,7 +81,6 @@ var globals = {
     'resemble': false,
     'game': false
 };
-
 var folder = process.argv[3] || 'src';
 var fileQueue = [];
 var filesReady = [];
