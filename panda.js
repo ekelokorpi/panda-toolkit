@@ -6,7 +6,9 @@ colors.setTheme({
     file: 'magenta',
     number: 'cyan',
     title: 'yellow',
-    error: 'red'
+    error: 'red',
+    command: 'magenta',
+    parameter: 'grey'
 });
 
 if(process.argv[2] === 'build') return require('./build.js');
@@ -20,7 +22,7 @@ if(process.argv[2] === 'version') {
 var data = require('./package.json');
 console.log(data.description.title + ' ' + data.version.number);
 console.log('');
-console.log('Usage: panda [command]');
+console.log('Usage: ' + 'panda'.command + ' ' + '[command]'.parameter);
 console.log('');
-console.log('Commands: build, offline, server');
+console.log('Commands: ' + 'build'.command + ', ' + 'offline'.command + ', ' + 'server'.command);
 console.log('');
