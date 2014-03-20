@@ -2,14 +2,14 @@
 
 var colors = require('colors');
 colors.setTheme({
-    url: 'green',
-    file: 'magenta',
+    url: 'yellow',
+    file: 'yellow',
     number: 'cyan',
-    title: 'yellow',
+    title: 'magenta',
+    command: 'yellow',
+    parameter: 'grey',
     valid: 'green',
-    error: 'red',
-    command: 'magenta',
-    parameter: 'grey'
+    error: 'red'
 });
 
 if(process.argv[2] === 'build') return require('./build.js');

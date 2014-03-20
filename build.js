@@ -1,14 +1,22 @@
 var UglifyJS = require('uglify-js');
 var fs = require('fs');
 var i, file, size, result, output, totalSize = 0;
-
 var configFile = process.argv[3] || 'src/game/config.js';
+
+console.log('Building...'.title);
+
 try {
     require(process.cwd() + '/' + configFile);
+    console.log('Using config ' + configFile.file);
 } catch(e) {
-    return console.log('Error reading config file.'.error);
+    // Load default config
+    console.log('Using default config');
+    pandaConfig = {
+        sourceFolder: 'src',
+        outputFile: 'game.min.js'
+    };
+    configFile = null;
 }
-console.log('Using config ' + configFile);
 
 var header = '// Made with Panda.js - http://www.pandajs.net';
 var include = ['engine/core.js', 'game/main.js'];
@@ -33,8 +41,6 @@ game.require = function() {
     return game;
 };
 game.body = function() {};
-
-console.log('Building...'.title);
 
 for (i = 0; i < include.length; i++) {
     require(dir + include[i]);
