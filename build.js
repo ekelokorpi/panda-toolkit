@@ -22,6 +22,7 @@ var header = '// Made with Panda.js - http://www.pandajs.net';
 var include = ['engine/core.js', 'game/main.js'];
 var dir = process.cwd() + '/' + pandaConfig.sourceFolder + '/';
 
+window = {};
 global['game'] = {};
 game.modules = [];
 game.module = function(name) {
