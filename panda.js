@@ -12,19 +12,7 @@ colors.setTheme({
     error: 'red'
 });
 
-if(process.argv[2] === 'build') return require('./build.js');
-if(process.argv[2] === 'server') return require('./server.js');
-if(process.argv[2] === 'offline') return require('./offline.js');
-if(process.argv[2] === 'test') return require('./test.js');
-if(process.argv[2] === 'debug') return require('./debug.js');
+global.commands = ['build', 'server', 'offline', 'test', 'debug'];
+var command = commands.indexOf(process.argv[2]) !== -1 ? process.argv[2] : 'help';
 
-var data = require('./package.json');
-
-console.log(data.description.title + ' ' + data.version.number);
-if(process.argv[2] === 'version') return;
-
-console.log('');
-console.log('Usage: ' + 'panda'.command + ' ' + '[command]'.parameter);
-console.log('');
-console.log('Commands: ' + 'build'.command + ', ' + 'offline'.command + ', ' + 'server'.command);
-console.log('');
+require('./' + command + '.js');
