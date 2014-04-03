@@ -12,7 +12,9 @@ colors.setTheme({
     error: 'red'
 });
 
-global.commands = ['build', 'server', 'offline', 'test', 'debug'];
+global.commands = ['build', 'server', 'cache', 'test', 'debug'];
 var command = commands.indexOf(process.argv[2]) !== -1 ? process.argv[2] : 'help';
+
+if(command === 'offline') command = 'cache'; // Deprecated
 
 require('./' + command + '.js');
