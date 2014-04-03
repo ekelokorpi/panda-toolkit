@@ -28,6 +28,8 @@ for (var i = 0; i < cacheFiles.length; i++) {
     output += cacheFiles[i] + '\n';
 }
 
+output += 'NETWORK:\n*\n';
+
 fs.writeFile(outputFile, output, function(err) {
     if(err) console.log(err);
     else {
