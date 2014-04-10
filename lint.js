@@ -1,7 +1,8 @@
 var jshint = require('jshint').JSHINT;
 var fs = require('fs');
-var ignoreFiles = ['.DS_Store'];
+var ignoreFiles = ['.DS_Store','.jshintrc'];
 var totalErrors = 0;
+
 var config = {
     'bitwise'       : false,    // Disallow bitwise operators (&, |, ^, etc.).
     'camelcase'     : true,     // Force all variable names to use either camelCase or UPPER_CASE.
@@ -10,7 +11,7 @@ var config = {
     'es3'           : false,    // Enforce conforming to ECMAScript 3.
     'forin'         : false,    // Disallow `for in` loops without `hasOwnPrototype`.
     'immed'         : true,     // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
-    'indent'        : false,    // Require that 4 spaces are used for indentation.
+    'indent'        : false,        // Require that 4 spaces are used for indentation.
     'latedef'       : true,     // Prohibit variable use before definition.
     'newcap'        : true,     // Require capitalization of all constructor functions e.g. `new F()`.
     'noarg'         : true,     // Prohibit use of `arguments.caller` and `arguments.callee`.
@@ -18,7 +19,7 @@ var config = {
     'nonew'         : false,    // Prohibit use of constructors for side-effects.
     'plusplus'      : false,    // Disallow use of `++` & `--`.
     'quotmark'      : true,     // Force consistency when using quote marks.
-    'undef'         : false,    // Require all non-global variables be declared before they are used.
+    'undef'         : true,    // Require all non-global variables be declared before they are used.
     'unused'        : true,     // Warn when varaibles are created by not used.
     'strict'        : false,    // Require `use strict` pragma in every file.
     'trailing'      : true,     // Prohibit trailing whitespaces.
@@ -67,8 +68,7 @@ var config = {
     'onevar'        : false,    // Allow only one `var` statement per function.
     'passfail'      : false,    // Stop on first error.
     'white'         : false,    // Check against strict whitespace and indentation rules.
-    'maxerr'        : 100,      // Maximum errors before stopping.
-    'notypeof'      : true
+    'maxerr'        : 100       // Maximum errors before stopping.
 };
 var globals = {
     'module': false,
@@ -115,17 +115,20 @@ var validateFiles = function(callback) {
         if(!jshint(data.toString(), config, globals)) {
             var out = jshint.data();
             var errors = out.errors;
-            console.log(file.file + ' ' + errors.length.toString() + ' errors.'.error);
+            console.log(file.file + ' ' + errors.length.toString().number + ' errors.'.error);
             totalErrors += errors.length;
+        } else {
+            console.log(file.file + ' valid!'.valid);
         }
         validateFiles(callback);
     });
 };
 
-console.log('Testing files..'.title);
+console.log('Linting files..'.title);
+
 readFiles(function() {
     validateFiles(function() {
-        if(totalErrors > 0) console.log('Total ' + totalErrors + ' errors.');
+        if(totalErrors > 0) console.log(('Total ' + totalErrors + ' errors.').error);
         else console.log('No errors found!'.valid);
     });
 });

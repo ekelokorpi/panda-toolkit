@@ -12,9 +12,10 @@ colors.setTheme({
     error: 'red'
 });
 
-global.commands = ['build', 'server', 'cache', 'test', 'debug'];
+global.commands = ['build', 'server', 'cache', 'lint', 'debug', 'jscs'];
 var command = commands.indexOf(process.argv[2]) !== -1 ? process.argv[2] : 'help';
 
 if(command === 'offline') command = 'cache'; // Deprecated
+if(command === 'test') command = 'lint'; // Deprecated
 
 require('./' + command + '.js');
