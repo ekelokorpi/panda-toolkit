@@ -166,9 +166,12 @@ module.exports.prototype = {
                     return;
                 }
 
-                if(firstBlock) {
-                    firstBlock = false;
-                    return;
+                if(
+                    node.parentNode.parentNode &&
+                    node.parentNode.parentNode.callee &&
+                    node.parentNode.parentNode.callee.property
+                ) {
+                    if(node.parentNode.parentNode.callee.property.name === 'body') return;
                 }
 
                 markChildren(node);
@@ -225,8 +228,6 @@ module.exports.prototype = {
                 check: false
             };
         });
-
-        var firstBlock = true;
 
         generateIndentations();
         checkIndentations();

@@ -75,6 +75,11 @@ checker.configure(config);
 
 var args = process.argv.splice(3);
 
+if(args.length === 0) {
+    args.push('src/engine');
+    args.push('src/game');
+}
+
 var reporter = require('jscs/lib/reporters/console');
 
 Vow.all(args.map(checker.checkPath, checker)).then(function(results) {
