@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 var colors = require('colors');
+var argm = process.argv[2];
+var file;
+
 colors.setTheme({
     url: 'yellow',
     file: 'yellow',
@@ -11,10 +14,20 @@ colors.setTheme({
     error: 'red'
 });
 
-global.commands = ['build', 'server', 'cache', 'lint', 'debug', 'check'];
-var command = commands.indexOf(process.argv[2]) !== -1 ? process.argv[2] : 'help';
+global.commands = {
+    build: ['Build your game', 'build', 'minify', 'b'],
+    server: ['Start web server', 'server', 's'],
+    cache: ['Create cache manifest', 'cache', 'offline', 'c'],
+    jscs: ['Check code style', 'check', 'lint', 'valid', 'jscs', 'test', 'l']
+};
 
-if (command === 'offline') command = 'cache'; // Deprecated
-if (command === 'test') command = 'lint'; // Deprecated
+for (var i in global.commands) {
+    for (var j = 1; j < global.commands[i].length; j++) {
+        if(global.commands[i][j] === argm) file = i;
+    }
+    if(file) break;
+}
 
-require('./' + command + '.js');
+if(!file) file = 'help';
+
+require('./' + file + '.js');

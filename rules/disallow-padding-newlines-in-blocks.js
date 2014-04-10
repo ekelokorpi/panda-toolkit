@@ -54,7 +54,17 @@ module.exports.prototype = {
             var closingBracket = tokens[closingBracketPos];
             var prevToken = tokens[closingBracketPos - 1];
 
-            if (closingBracket.loc.start.line > prevToken.loc.start.line + 1) {
+            var prevPos = prevToken.loc.start.line + 1;
+
+            var commentRows = 0;
+            for (var i = 0; i < comments.length; i++) {
+                if(comments[i].loc.start.line >= prevPos && comments[i].loc.start.line < closingBracket.loc.start.line) {
+                    commentRows += (comments[i].loc.end.line - comments[i].loc.start.line) + 1;
+                }
+            }
+            prevPos += commentRows;
+
+            if (closingBracket.loc.start.line > prevPos) {
                 errors.add('Expected no padding newline before closing curly brace', prevToken.loc.end);
             }
         });

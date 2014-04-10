@@ -4,16 +4,16 @@ module.exports = function() {};
 
 module.exports.prototype = {
 
-    configure: function(validateIndentation) {
+    configure: function(validateIndentationInsideBody) {
         assert(
-            validateIndentation === '\t' ||
-                (typeof validateIndentation === 'number' && validateIndentation > 0),
-            'validateIndentation option requires a positive number of spaces or "\\t"'
+            validateIndentationInsideBody === '\t' ||
+                (typeof validateIndentationInsideBody === 'number' && validateIndentationInsideBody > 0),
+            'validateIndentationInsideBody option requires a positive number of spaces or "\\t"'
         );
 
-        if (typeof validateIndentation === 'number') {
+        if (typeof validateIndentationInsideBody === 'number') {
             this._indentChar = ' ';
-            this._indentSize = validateIndentation;
+            this._indentSize = validateIndentationInsideBody;
         } else {
             this._indentChar = '\t';
             this._indentSize = 1;
@@ -30,7 +30,7 @@ module.exports.prototype = {
     },
 
     getOptionName: function() {
-        return 'validateIndentation';
+        return 'validateIndentationInsideBody';
     },
 
     check: function(file, errors) {
@@ -171,7 +171,10 @@ module.exports.prototype = {
                     node.parentNode.parentNode.callee &&
                     node.parentNode.parentNode.callee.property
                 ) {
-                    if(node.parentNode.parentNode.callee.property.name === 'body') return;
+                    if(node.parentNode.parentNode.callee.property.name === 'body') {
+                        markChildren(node);
+                        return;
+                    }
                 }
 
                 markChildren(node);

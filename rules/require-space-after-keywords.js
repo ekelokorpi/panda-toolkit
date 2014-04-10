@@ -23,22 +23,21 @@ module.exports.prototype = {
 
             // Funarg will be interpreted as an identifier not a keyword #277
             if (token.type === 'Identifier' && token.value !== 'function') {
-                // return;
-            }
+                if (keywordIndex[token.value] === true) {
+                    var nextToken = tokens[i + 1];
 
-            if (keywordIndex[token.value]) {
-                var nextToken = tokens[i + 1];
-
-                if (nextToken && nextToken.range[0] - token.range[1] !== 1) {
-                    if (nextToken.type !== 'Punctuator' || nextToken.value !== ';') {
-                        errors.add(
-                            'Missing space after `' + token.value + '` keyword',
-                            nextToken.loc.start.line,
-                            nextToken.loc.start.column
-                        );
+                    if (nextToken && nextToken.range[0] - token.range[1] !== 1) {
+                        if (nextToken.type !== 'Punctuator' || nextToken.value !== ';') {
+                            errors.add(
+                                'Missing space after `' + token.value + '` keyword',
+                                nextToken.loc.start.line,
+                                nextToken.loc.start.column
+                            );
+                        }
                     }
                 }
             }
+
         });
     }
 

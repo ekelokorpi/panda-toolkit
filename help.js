@@ -1,13 +1,11 @@
 var data = require('./package.json');
 
 console.log(data.description.title + ' ' + ('v' + data.version).number);
-if(process.argv[2] === 'version') return;
-
 console.log('');
 console.log('Usage: ' + 'panda'.command + ' ' + '[command]'.parameter);
 console.log('');
 console.log('Commands:');
-for (var i = 0; i < commands.length; i++) {
-    console.log('       ' + commands[i].command);
+for (var i in commands) {
+    console.log('       ' + commands[i][1].command + '\t' + commands[i][0].grey);
 }
 console.log('');
