@@ -5,6 +5,7 @@ var configFile = process.argv[3] || 'src/game/config.js';
 
 console.log('Building...'.title);
 
+// Read config file
 try {
     require(process.cwd() + '/' + configFile);
     console.log('Using config ' + configFile.file);
@@ -50,25 +51,27 @@ for (var i = 0; i < game.coreModules.length; i++) {
     game.module(game.coreModules[i]);
 }
 
+// Process main game module
 require(dir + 'game/main.js');
 
+// Include dir to modules
 for (i = 0; i < game.modules.length; i++) {
     file = game.modules[i];
-    game.modules[i] = dir + game.modules[i];
+    game.modules[i] = dir + file;
     size = fs.statSync(game.modules[i]).size;
     totalSize += size;
     console.log(file.file + ' ' + (size.toString()).number + ' bytes');
 }
 if (configFile) game.modules.unshift(configFile);
-
 console.log('Total ' + (totalSize.toString()).number + ' bytes');
 
-result = UglifyJS.minify(game.modules, {
+// Minify
+result = UglifyJS.minify(game.modules);
 
-});
-
+// Insert header
 output = header + '\n';
 
+// Insert sitelock function
 if (pandaConfig.sitelock) {
     var secret = 0;
     for (i = 0; i < pandaConfig.sitelock.length; i++) {
@@ -78,9 +81,10 @@ if (pandaConfig.sitelock) {
     output += sitelockFunc;
 }
 
-output += 'window.pandaConfig = null;';
-output += result.code;
+// Remove strict mode
+output += result.code.replace('"use strict";', '');
 
+// Write minified file
 fs.writeFile(pandaConfig.outputFile, output, function(err) {
     if (err) {
         console.log(err);
