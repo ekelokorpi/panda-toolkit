@@ -16,7 +16,7 @@ colors.setTheme({
 
 global.commands = {
     build: ['Build your game', 'build', 'minify', 'b'],
-    server: ['Start web server', 'server', 's'],
+    server: ['Start web server', 'server', 'start','s'],
     cache: ['Create cache manifest', 'cache', 'offline', 'c'],
     jscs: ['Check code style', 'check', 'lint', 'valid', 'jscs', 'test', 'l']
 };
