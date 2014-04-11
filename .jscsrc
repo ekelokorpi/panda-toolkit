@@ -14,7 +14,7 @@
     "requireSpaceBeforeBlockStatements": true,
     "requireParenthesesAroundIIFE": true,
     "requireBlocksOnNewline": true,
-    "disallowPaddingNewlinesInBlocks": true,
+    "disallowPaddingNewlinesInBlocks2": true,
     "disallowEmptyBlocks": true,
     "disallowSpacesInsideArrayBrackets": true,
     "disallowSpacesInsideParentheses": true,
@@ -109,5 +109,7 @@
     "disallowNewlinesBeforeCurlyBraces": [
         ")"
     ],
-    "disallowMultipleSpaces": true
+    "disallowMultipleSpaces": true,
+    "requireNewlineAfterBlock": true,
+    "disallowNewlineAtFileEnd": true
 }

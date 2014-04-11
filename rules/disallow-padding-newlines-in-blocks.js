@@ -4,28 +4,31 @@ module.exports = function() {};
 
 module.exports.prototype = {
 
-    configure: function(disallowPaddingNewlinesInBlocks) {
+    configure: function(disallowPaddingNewlinesInBlocks2) {
         assert(
-            disallowPaddingNewlinesInBlocks === true,
-            'disallowPaddingNewlinesInBlocks option requires the value true or should be removed'
+            disallowPaddingNewlinesInBlocks2 === true,
+            'disallowPaddingNewlinesInBlocks2 option requires the value true or should be removed'
         );
     },
 
     getOptionName: function() {
-        return 'disallowPaddingNewlinesInBlocks';
+        return 'disallowPaddingNewlinesInBlocks2';
     },
 
     check: function(file, errors) {
-        var firstBlock = true;
-
         file.iterateNodesByType('BlockStatement', function(node) {
             if (node.body.length === 0) {
                 return;
             }
 
-            if(firstBlock) {
-                firstBlock = false;
-                return;
+            if (
+                node.parentNode.parentNode &&
+                node.parentNode.parentNode.callee &&
+                node.parentNode.parentNode.callee.property
+            ) {
+                if (node.parentNode.parentNode.callee.property.name === 'body') {
+                    return;
+                }
             }
 
             var tokens = file.getTokens();
@@ -40,7 +43,7 @@ module.exports.prototype = {
 
             var commentRows = 0;
             for (var i = 0; i < comments.length; i++) {
-                if(comments[i].loc.start.line >= nextPos && comments[i].loc.start.line < nextToken.loc.start.line) {
+                if (comments[i].loc.start.line >= nextPos && comments[i].loc.start.line < nextToken.loc.start.line) {
                     commentRows += (comments[i].loc.end.line - comments[i].loc.start.line) + 1;
                 }
             }
@@ -58,7 +61,7 @@ module.exports.prototype = {
 
             var commentRows = 0;
             for (var i = 0; i < comments.length; i++) {
-                if(comments[i].loc.start.line >= prevPos && comments[i].loc.start.line < closingBracket.loc.start.line) {
+                if (comments[i].loc.start.line >= prevPos && comments[i].loc.start.line < closingBracket.loc.start.line) {
                     commentRows += (comments[i].loc.end.line - comments[i].loc.start.line) + 1;
                 }
             }
