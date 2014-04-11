@@ -10,24 +10,18 @@
 
 ### Commands
 
-- `build` Build game
+Build your game
 
-    Parameters:
-    
-    - `configFile` Filename of config file _(src/game/config.js)_
+    $ panda build
 
-- `offline` Create cache manifest
+Start web server
 
-    Parameters:
+    $ panda server
 
-     - `cacheFile` Filename of cache file _(game.cache)_
-    
-     - `gameFile` Filename of game file _(game.min.js)_
-    
-     - `mediaDir` Directory of media files _(media)_
+Create cache manifest
 
-- `server` Start local web server
+    $ panda cache
 
-    Parameters:
+Check code style
 
-    - `port` Server port _(5975)_
+    $ panda check
