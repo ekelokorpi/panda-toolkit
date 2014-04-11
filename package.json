@@ -15,7 +15,8 @@
     "colors": "~0.6.2",
     "ws": "~0.4.31",
     "jscs": "~1.3.0",
-    "open": "0.0.5"
+    "open": "0.0.5",
+    "node-watch": "^0.3.4"
   },
   "bin": {
     "panda": "./panda.js"
