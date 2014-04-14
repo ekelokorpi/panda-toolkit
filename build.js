@@ -2,6 +2,7 @@ var UglifyJS = require('uglify-js');
 var fs = require('fs');
 var i, file, size, result, output, totalSize = 0;
 var configFile = process.argv[3] || 'src/game/config.js';
+var header = '// Made with Panda.js - http://www.pandajs.net';
 
 console.log('Building...'.title);
 
@@ -16,11 +17,12 @@ try {
         sourceFolder: 'src',
         outputFile: 'game.min.js'
     };
-    configFile = null;
 }
 
-var header = '// Made with Panda.js - http://www.pandajs.net';
 var dir = process.cwd() + '/' + pandaConfig.sourceFolder + '/';
+
+// Disable debug mode
+if (pandaConfig.debug) delete pandaConfig.debug.enabled;
 
 window = {};
 global['game'] = {};
@@ -62,16 +64,18 @@ for (i = 0; i < game.modules.length; i++) {
     totalSize += size;
     console.log(file.file + ' ' + (size.toString()).number + ' bytes');
 }
-if (configFile) game.modules.unshift(configFile);
 console.log('Total ' + (totalSize.toString()).number + ' bytes');
 
 // Minify
 result = UglifyJS.minify(game.modules);
 
-// Insert header
+// Include header
 output = header + '\n';
 
-// Insert sitelock function
+// Include config
+output += 'pandaConfig=' + JSON.stringify(pandaConfig) + ';';
+
+// Include sitelock function
 if (pandaConfig.sitelock) {
     var secret = 0;
     for (i = 0; i < pandaConfig.sitelock.length; i++) {
@@ -81,10 +85,10 @@ if (pandaConfig.sitelock) {
     output += sitelockFunc;
 }
 
-// Remove strict mode
+// Include minified code
 output += result.code.replace('"use strict";', '');
 
-// Write minified file
+// Write output file
 fs.writeFile(pandaConfig.outputFile, output, function(err) {
     if (err) {
         console.log(err);
