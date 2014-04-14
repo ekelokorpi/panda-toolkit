@@ -10,13 +10,17 @@
 
 ### Commands
 
-Build your game
+Install Panda.js engine
 
-    $ panda build
+    $ panda install
 
 Start web server
 
     $ panda server
+
+Build your game
+
+    $ panda build
 
 Create cache manifest
 
