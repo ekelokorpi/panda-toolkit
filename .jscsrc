@@ -111,5 +111,6 @@
     ],
     "disallowMultipleSpaces": true,
     "requireNewlineAfterBlock": true,
-    "disallowNewlineAtFileEnd": true
+    // "disallowNewlineAtFileEnd": true,
+    "requireLineFeedAtFileEnd": true
 }
