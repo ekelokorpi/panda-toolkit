@@ -1,4 +1,4 @@
-## Panda.js node toolkit
+## Panda.js toolkit
 
 ### Install
 
@@ -18,7 +18,7 @@ Start web server
 
     $ panda server
 
-Build your game
+Build game
 
     $ panda build
 

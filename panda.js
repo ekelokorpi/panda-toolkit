@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var colors = require('colors');
 var argm = process.argv[2];
-var file;
+var command;
 
 colors.setTheme({
     url: 'yellow',
@@ -15,6 +15,7 @@ colors.setTheme({
 });
 
 global.commands = {
+    // file: [desc, alias1, alias2, alias3...]
     build: ['Build your game', 'build', 'minify', 'b'],
     server: ['Start web server', 'server', 'start','s'],
     cache: ['Create cache manifest', 'cache', 'offline', 'c'],
@@ -22,13 +23,15 @@ global.commands = {
     install: ['Install Panda.js', 'install', 'i']
 };
 
+// Parse command from arguments
 for (var i in global.commands) {
     for (var j = 1; j < global.commands[i].length; j++) {
-        if(global.commands[i][j] === argm) file = i;
+        if(global.commands[i][j] === argm) command = i;
     }
-    if(file) break;
+    if(command) break;
 }
 
-if(!file) file = 'help';
+// Default command
+if(!command) command = 'help';
 
-require('./' + file + '.js');
+require('./' + command + '.js');
