@@ -24,6 +24,7 @@ readDir(mediaDir, cacheFiles);
 console.log('Total '+(cacheFiles.length.toString()).number+' files');
 
 var output = 'CACHE MANIFEST' + '\n';
+output += 'index.html' + '\n';
 for (var i = 0; i < cacheFiles.length; i++) {
     output += cacheFiles[i] + '\n';
 }
