@@ -10,6 +10,8 @@ console.log('Building...'.title);
 try {
     require(process.cwd() + '/' + configFile);
     console.log('Using config ' + configFile.file);
+    if (!pandaConfig.sourceFolder) pandaConfig.sourceFolder = 'src';
+    if (!pandaConfig.outputFile) pandaConfig.outputFile = 'game.min.js';
 } catch (e) {
     // Load default config
     console.log('Using default config');
