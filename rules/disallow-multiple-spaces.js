@@ -22,7 +22,7 @@ module.exports.prototype = {
     check: function(file, errors) {
         file.iterateTokensByType(['Punctuator', 'Identifier', 'Keyword'], function(token, i, tokens) {
             var next = tokens[i + 1];
-            if (next && token.loc.start.row === next.loc.start.row) {
+            if (next && token.loc.start.line === next.loc.start.line) {
                 if (next && next.loc.start.column - token.loc.end.column > 1) {
                     errors.add('Illegal multiple spaces', token.loc.start);
                 }
