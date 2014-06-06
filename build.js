@@ -48,11 +48,12 @@ game.require = function() {
 game.body = function() {};
 
 // Get core modules
+pandaConfig.ignoreModules = pandaConfig.ignoreModules || [];
 var pandaCore = require(dir + 'engine/core.js');
 if(pandaConfig.coreModules) game.coreModules = pandaConfig.coreModules;
 else game.coreModules = pandaCore.coreModules;
 for (var i = 0; i < game.coreModules.length; i++) {
-    game.module(game.coreModules[i]);
+    if (pandaConfig.ignoreModules.indexOf(game.coreModules[i]) === -1) game.module(game.coreModules[i]);
 }
 
 // Process main game module
