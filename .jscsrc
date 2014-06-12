@@ -95,7 +95,7 @@
         "else"
     ],
     // "maximumLineLength": 200,
-    "requireCapitalizedConstructors": true,
+    // "requireCapitalizedConstructors": true,
     "disallowYodaConditions": true,
     "disallowMultipleLineStrings": true,
     "disallowParenthesesAfterKeywords": [
