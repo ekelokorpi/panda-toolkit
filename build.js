@@ -50,7 +50,7 @@ game.body = function() {};
 // Get core modules
 pandaConfig.ignoreModules = pandaConfig.ignoreModules || [];
 var pandaCore = require(dir + 'engine/core.js');
-if(pandaConfig.coreModules) game.coreModules = pandaConfig.coreModules;
+if (pandaConfig.coreModules) game.coreModules = pandaConfig.coreModules;
 else game.coreModules = pandaCore.coreModules;
 for (var i = 0; i < game.coreModules.length; i++) {
     if (pandaConfig.ignoreModules.indexOf(game.coreModules[i]) === -1) game.module(game.coreModules[i]);
@@ -91,7 +91,7 @@ if (pandaConfig.sitelock) {
 // Include minified code
 output += result.code.replace('"use strict";', '');
 
-// Add build number
+// Include build number
 output += 'game.build=' + Date.now() + ';';
 
 // Write output file

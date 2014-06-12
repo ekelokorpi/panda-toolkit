@@ -7,21 +7,21 @@ var watchMode = false;
 
 // Parse options
 for (var i = args.length - 1; i >= 0; i--) {
-    if(args[i] === '-w') {
+    if (args[i] === '-w') {
         args.splice(i, 1);
         watchMode = true;
     }
 }
 
 // Load default paths
-if(args.length === 0) {
+if (args.length === 0) {
     args.push('src/engine');
     args.push('src/game');
 }
 
 // Load config file
 var config = loader.load('.jscsrc', __dirname);
-if(!config) return console.log('Error loading config file.'.error);
+if (!config) return console.log('Error loading config file.'.error);
 
 // Include path in exclude files
 for (var i = 0; i < config.excludeFiles.length; i++) {
@@ -49,7 +49,7 @@ function parseResults(results) {
         }
     });
 
-    if(errorCount) console.log(('Total ' + errorCount + ' errors found.').error);
+    if (errorCount) console.log(('Total ' + errorCount + ' errors found.').error);
     else console.log('Your code is valid!'.valid);
 };
 
@@ -63,7 +63,7 @@ function checkFiles(files) {
     });
 };
 
-if(watchMode) {
+if (watchMode) {
     console.log('Watching for file changes...'.title);
 
     var watch = require('node-watch');
@@ -73,4 +73,7 @@ if(watchMode) {
         checkFiles([filename]);
     });
     return true;
-} else checkFiles(args);
+}
+else {
+    checkFiles(args);
+}

@@ -8,10 +8,10 @@ var ignoreFiles = ['.DS_Store'];
 var readDir = function(dir, filesArray) {
     var files = fs.readdirSync(dir);
     for (var i = files.length - 1; i >= 0; i--) {
-        if(fs.statSync(dir + '/' + files[i]).isDirectory()) {
+        if (fs.statSync(dir + '/' + files[i]).isDirectory()) {
             readDir(dir + '/' + files[i], filesArray);
         }
-        else if(ignoreFiles.indexOf(files[i]) === -1) {
+        else if (ignoreFiles.indexOf(files[i]) === -1) {
             filesArray.push(dir + '/' + files[i]);
         }
     }
@@ -21,7 +21,7 @@ var cacheFiles = [];
 console.log('Building cache manifest...'.title);
 cacheFiles.push(gameFile);
 readDir(mediaDir, cacheFiles);
-console.log('Total '+(cacheFiles.length.toString()).number+' files');
+console.log('Total ' + (cacheFiles.length.toString()).number + ' files');
 
 var output = 'CACHE MANIFEST' + '\n';
 for (var i = 0; i < cacheFiles.length; i++) {
@@ -31,7 +31,9 @@ for (var i = 0; i < cacheFiles.length; i++) {
 output += '\nNETWORK:\n*\n';
 
 fs.writeFile(outputFile, output, function(err) {
-    if(err) console.log(err);
+    if (err) {
+        console.log(err);
+    }
     else {
         var size = fs.statSync(outputFile).size;
         console.log('Saved ' + outputFile.file + ' ' + (size.toString()).number + ' bytes');
