@@ -91,6 +91,9 @@ if (pandaConfig.sitelock) {
 // Include minified code
 output += result.code.replace('"use strict";', '');
 
+// Add build number
+output += 'game.build=' + Date.now() + ';';
+
 // Write output file
 fs.writeFile(pandaConfig.outputFile, output, function(err) {
     if (err) {
