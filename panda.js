@@ -20,7 +20,8 @@ global.commands = {
     server: ['Start web server', 'server', 'start', 's'],
     cache: ['Create cache manifest', 'cache', 'offline', 'c'],
     check: ['Check code style', 'check', 'lint', 'valid', 'jscs', 'test', 'l'],
-    install: ['Install Panda.js', 'install', 'i']
+    install: ['Install Panda.js', 'install', 'i'],
+    update: ['Update Panda.js', 'update', 'u']
 };
 
 // Parse command from arguments
