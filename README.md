@@ -6,4 +6,4 @@
 
 ### Usage
     
-    $ panda [command]
+    $ panda <command> [options]
