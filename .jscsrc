@@ -105,7 +105,7 @@
     "requireTypeCoercion": true,
     "validateIndentationInsideBody": 4,
     "additionalRules": ["rules/*.js"],
-    "excludeFiles": ["src/engine/renderer.js"],
+    "excludeFiles": ["src/engine/pixi.js"],
     "disallowNewlinesBeforeCurlyBraces": [
         ")"
     ],
