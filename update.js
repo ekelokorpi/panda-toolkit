@@ -4,9 +4,11 @@ var path = require("path");
 
 // Settings
 var tempDir = '.panda';
-var url = 'https://github.com/ekelokorpi/panda.js/archive/master.zip';
+var devMode = (process.argv[3] === 'dev');
+var url = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
 console.log('Updating Panda.js engine...'.title);
+if (devMode) console.log('(develop version)');
 
 var filesToMove = [];
 
