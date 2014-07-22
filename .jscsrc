@@ -86,7 +86,7 @@
         "*",
         "="
     ],
-    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    // "requireCamelCaseOrUpperCaseIdentifiers": true,
     "disallowMultipleEmptyLines": true,
     "validateQuoteMarks": "'",
     "disallowMixedSpacesAndTabs": true,
