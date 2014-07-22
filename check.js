@@ -41,7 +41,7 @@ function parseResults(results) {
         if (!errors.isEmpty()) {
             var errorList = errors.getErrorList();
 
-            for (var i = errorList.length - 1; i >= 0; i--) {
+            for (var i = 0; i < errorList.length; i++) {
                 var error = errorList[i];
                 errorCount++;
                 console.log(file.file + ' line ' + error.line.toString().number + ' col ' + error.column.toString().number + ' ' + error.message.error);
