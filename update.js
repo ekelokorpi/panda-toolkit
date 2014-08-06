@@ -4,7 +4,8 @@ var path = require("path");
 
 // Settings
 var tempDir = '.panda';
-var devMode = (process.argv[3] === 'dev');
+var arg = process.argv[3] || '';
+var devMode = (arg.indexOf('dev') !== -1);
 var url = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
 console.log('Updating Panda.js engine...'.title);

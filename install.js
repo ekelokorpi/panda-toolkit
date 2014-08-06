@@ -4,7 +4,8 @@ var path = require("path");
 
 // Settings
 var tempDir = '.panda';
-var devMode = (process.argv[3] === 'dev');
+var arg = process.argv[3] || '';
+var devMode = (arg.indexOf('dev') !== -1);
 var engineUrl = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 var templateUrl = 'https://github.com/ekelokorpi/panda.js-template/archive/master.zip';
 
