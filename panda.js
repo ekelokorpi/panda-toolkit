@@ -21,7 +21,8 @@ global.commands = {
     cache: ['Create cache manifest', 'cache', 'offline', 'c'],
     check: ['Check code style', 'check', 'lint', 'valid', 'jscs', 'test', 'l'],
     install: ['Install Panda.js', 'install', 'i'],
-    update: ['Update Panda.js', 'update', 'u']
+    update: ['Update Panda.js', 'update', 'u'],
+    version: ['Version control', 'version', 'v']
 };
 
 // Parse command from arguments
