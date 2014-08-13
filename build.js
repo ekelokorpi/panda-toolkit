@@ -37,6 +37,7 @@ game.module = function(name) {
 game.require = function() {
     var i, name, modules = Array.prototype.slice.call(arguments);
     for (i = 0; i < modules.length; i++) {
+        if (pandaConfig.ignoreModules.indexOf(modules[i]) !== -1) continue;
         name = modules[i].replace(/\./g, '/') + '.js';
         if (game.modules.indexOf(name) === -1) {
             game.modules.push(name);
@@ -53,7 +54,7 @@ var pandaCore = require(dir + 'engine/core.js');
 if (pandaConfig.coreModules) game.coreModules = pandaConfig.coreModules;
 else game.coreModules = pandaCore.coreModules;
 for (var i = 0; i < game.coreModules.length; i++) {
-    if (pandaConfig.ignoreModules.indexOf(game.coreModules[i]) === -1) game.module(game.coreModules[i]);
+    game.module(game.coreModules[i]);
 }
 
 // Process main game module
