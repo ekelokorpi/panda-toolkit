@@ -2,7 +2,7 @@
 
 ### Install
 
-    $ npm install pandatool -g
+    $ npm install -g pandatool
 
 ### Usage
     
