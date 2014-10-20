@@ -8,10 +8,10 @@ try {
     require(configFilePath);
 }
 catch(e) {
-    return console.log('Config file not found');
+    return console.log('Config file not found'.error);
 }
 
-if (typeof pandaConfig !== 'object') return console.log('Invalid config file');
+if (typeof pandaConfig !== 'object') return console.log('Invalid config file'.error);
 
 if (pandaConfig.version) {
     var version = pandaConfig.version.split('.');
@@ -20,7 +20,7 @@ if (pandaConfig.version) {
     }
 }
 else {
-    return console.log('No version found.');
+    return console.log('No version found.'.error);
 }
 
 if (param.indexOf('major') !== -1) {
@@ -36,7 +36,7 @@ else if (param.indexOf('patch') !== -1) {
     version[2]++;
 }
 else {
-    return console.log('Invalid parameter');
+    return console.log('Invalid parameter'.error);
 }
 
 var verStr = version.join('.');
@@ -45,19 +45,19 @@ console.log(pandaConfig.version.number + ' into ' + verStr.number);
 
 // Update config.js
 fs.readFile(configFilePath, { encoding: 'UTF-8' }, function (err, data) {
-    if (err) return console.log('Error reading config file');
+    if (err) return console.log('Error reading config file'.error);
     data = data.replace(pandaConfig.version, verStr);
     
     fs.writeFile(configFilePath, data, function (err) {
-        if (err) return console.log('Error writing config file');
+        if (err) return console.log('Error writing config file'.error);
 
         // Commit changes
         exec('git commit -a -m \'Updated version to ' + verStr + '\'', function (err, output) {
-            if (err !== null) return console.log('Error commiting changes');
+            if (err !== null) return console.log('Error commiting changes'.error);
 
             // Create new git tag
             exec('git tag -a ' + verStr + ' -m \'Updated version to ' + verStr + '\'', function (err, output) {
-                if (err !== null) return console.log('Error creating version tag');
+                if (err !== null) return console.log('Error creating version tag'.error);
                 console.log('Updated.'.green);
             });
         });
