@@ -14,13 +14,16 @@ if (devMode) console.log('(develop version)');
 
 var engineFilesToMove = [
     'src/engine',
-    'index.html'
+    'index.html',
+    'dev.html'
 ];
 
 function moveEngineFiles() {
     if (engineFilesToMove.length === 0) {
         rmdir(tempDir);
-        console.log('Done'.valid);
+        fs.mkdir('media', function() {
+            console.log('Done'.valid);
+        });
         return;
     }
     var file = engineFilesToMove.shift();
