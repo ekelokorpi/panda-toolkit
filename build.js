@@ -3,6 +3,8 @@ var fs = require('fs');
 var i, file, size, result, output, totalSize = 0;
 var configFile = process.argv[3] || 'src/game/config.js';
 var header = '// Made with Panda.js - http://www.pandajs.net';
+var sourceFolder = 'src';
+var outputFile = 'game.min.js';
 
 console.log('Building...'.title);
 
@@ -10,18 +12,20 @@ console.log('Building...'.title);
 try {
     require(process.cwd() + '/' + configFile);
     console.log('Using config ' + configFile.file);
-    if (!pandaConfig.sourceFolder) pandaConfig.sourceFolder = 'src';
-    if (!pandaConfig.outputFile) pandaConfig.outputFile = 'game.min.js';
+    if (pandaConfig.sourceFolder) {
+        sourceFolder = pandaConfig.sourceFolder;
+        delete pandaConfig.sourceFolder;
+    }
+    if (pandaConfig.outputFile) {
+        outputFile = pandaConfig.outputFile;
+        delete pandaConfig.outputFile;
+    }
 } catch (e) {
     // Load default config
     console.log('Using default config');
-    pandaConfig = {
-        sourceFolder: 'src',
-        outputFile: 'game.min.js'
-    };
 }
 
-var dir = process.cwd() + '/' + pandaConfig.sourceFolder + '/';
+var dir = process.cwd() + '/' + sourceFolder + '/';
 
 // Disable debug mode
 if (pandaConfig.debug) delete pandaConfig.debug.enabled;
@@ -59,6 +63,7 @@ for (var i = 0; i < game.coreModules.length; i++) {
 
 // Process main game module
 require(dir + 'game/main.js');
+delete pandaConfig.ignoreModules;
 
 // Include dir to modules
 for (i = 0; i < game.modules.length; i++) {
@@ -96,13 +101,13 @@ output += result.code.replace('"use strict";', '');
 output += 'game.build=' + Date.now() + ';';
 
 // Write output file
-fs.writeFile(pandaConfig.outputFile, output, function(err) {
+fs.writeFile(outputFile, output, function(err) {
     if (err) {
         console.log(err);
     }
     else {
-        var size = fs.statSync(pandaConfig.outputFile).size;
+        var size = fs.statSync(outputFile).size;
         var percent = Math.round((size / totalSize) * 100);
-        console.log('Saved ' + pandaConfig.outputFile.file + ' ' + (size.toString()).number + ' bytes (' + percent + '%)');
+        console.log('Saved ' + outputFile.file + ' ' + (size.toString()).number + ' bytes (' + percent + '%)');
     }
 });
