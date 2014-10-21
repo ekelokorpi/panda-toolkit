@@ -15,4 +15,4 @@ app.configure(function() {
 app.listen(port);
 console.log('Server started at ' + ('http://localhost:' + port).url);
 
-open('http://localhost:' + port);
+open('http://localhost:' + port + '/dev.html');
