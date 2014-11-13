@@ -5,6 +5,7 @@ var configFile = process.argv[3] || 'src/game/config.js';
 var header = '// Made with Panda.js - http://www.pandajs.net';
 var sourceFolder = 'src';
 var outputFile = 'game.min.js';
+var defaultModules = false;
 
 console.log('Building...'.title);
 
@@ -32,7 +33,6 @@ if (pandaConfig.debug) delete pandaConfig.debug.enabled;
 
 global['game'] = {};
 game.modules = ['engine/core.js'];
-game.coreModules = [];
 game.module = function(name) {
     name = name.replace(/\./g, '/') + '.js';
     if (game.modules.indexOf(name) === -1) game.modules.push(name);
@@ -55,15 +55,25 @@ game.body = function() {};
 // Get core modules
 pandaConfig.ignoreModules = pandaConfig.ignoreModules || [];
 var pandaCore = require(dir + 'engine/core.js');
-if (pandaConfig.coreModules) game.coreModules = pandaConfig.coreModules;
-else game.coreModules = pandaCore.coreModules;
+game.coreModules = pandaCore.coreModules;
+
+// Ignore debug module
+var debugIndex = pandaConfig.ignoreModules.indexOf('engine.debug');
+if (debugIndex === -1) pandaConfig.ignoreModules.push('engine.debug');
+
+// Remove ignored modules
+for (var i = 0; i < pandaConfig.ignoreModules.length; i++) {
+    var index = game.coreModules.indexOf(pandaConfig.ignoreModules[i]);
+    if (index !== -1) game.coreModules.splice(index, 1);
+}
+
+// Read core modules
 for (var i = 0; i < game.coreModules.length; i++) {
     game.module(game.coreModules[i]);
 }
 
 // Process main game module
 require(dir + 'game/main.js');
-delete pandaConfig.ignoreModules;
 
 // Include dir to modules
 for (i = 0; i < game.modules.length; i++) {
