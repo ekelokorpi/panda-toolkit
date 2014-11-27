@@ -17,7 +17,8 @@
     "open": "0.0.5",
     "node-watch": "^0.3.4",
     "boilerplate": "^0.1.5",
-    "download": "^0.1.17"
+    "download": "^0.1.17",
+    "imagemin": "^3.1.0"
   },
   "bin": {
     "panda": "./panda.js"

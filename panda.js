@@ -22,7 +22,8 @@ global.commands = {
     check: ['Check code style', 'check', 'lint', 'valid', 'jscs', 'test', 'l'],
     install: ['Install Panda.js', 'install', 'i'],
     update: ['Update Panda.js', 'update', 'u'],
-    version: ['Version control', 'version', 'v']
+    version: ['Version control', 'version', 'v'],
+    compress: ['Compress image files', 'compress', 'tinypng']
 };
 
 // Parse command from arguments
