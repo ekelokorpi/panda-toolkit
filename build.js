@@ -73,7 +73,8 @@ for (var i = 0; i < game.coreModules.length; i++) {
 }
 
 // Process main game module
-require(dir + 'game/main.js');
+var gameMainModule = pandaConfig.gameMainModule || 'main';
+require(dir + 'game/' + gameMainModule + '.js');
 
 // Include dir to modules
 for (i = 0; i < game.modules.length; i++) {
