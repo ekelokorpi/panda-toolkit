@@ -1,6 +1,6 @@
 {
   "name": "pandatool",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "Panda.js toolkit",
   "main": "panda.js",
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
