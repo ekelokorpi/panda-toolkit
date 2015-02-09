@@ -28,9 +28,6 @@ try {
 
 var dir = process.cwd() + '/' + sourceFolder + '/';
 
-// Disable debug mode
-if (pandaConfig.debug) delete pandaConfig.debug.enabled;
-
 global['game'] = {};
 game.modules = ['engine/core.js'];
 game.module = function(name) {
@@ -91,6 +88,11 @@ result = UglifyJS.minify(game.modules);
 
 // Include header
 output = header + '\n';
+
+// Clean config
+delete pandaConfig.ignoreModules;
+delete pandaConfig.debug;
+delete pandaConfig.debugDraw;
 
 // Include config
 output += 'pandaConfig=' + JSON.stringify(pandaConfig) + ';';
