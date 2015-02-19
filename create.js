@@ -53,7 +53,10 @@ var create = function(dir, params, callback) {
 
     function createProject() {
         fs.mkdir(dir + '/' + folder + '/src', function(err) {
-            if (err) return callback('Error creating src folder');
+            if (err) {
+                rmdir(dir + '/' + tempDir);
+                return callback('Error creating src folder');
+            }
             
             var wget = download(engineUrl, dir + '/' + tempDir, { extract: true, strip: 1 });
 
@@ -80,12 +83,10 @@ var create = function(dir, params, callback) {
             if (err) return callback('Error creating temp folder');
 
             if (folder === '.') {
-
-
                 createProject();
             }
             else {
-                fs.mkdir(folder, function(err) {
+                fs.mkdir(dir + '/' + folder, function(err) {
                     if (err) {
                         rmdir(dir + '/' + tempDir);
                         return callback('Error creating project folder');
