@@ -1,4 +1,4 @@
-## Panda.js toolkit
+## Panda.js CLI
 
 ### Install
 
