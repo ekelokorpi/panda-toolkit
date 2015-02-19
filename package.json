@@ -1,6 +1,6 @@
 {
   "name": "pandajs",
-  "version": "1.11.3",
+  "version": "1.11.4",
   "description": "Panda.js CLI",
   "main": "index.js",
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
