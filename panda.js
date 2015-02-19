@@ -19,5 +19,5 @@ if (!command || !pandajs[command]) return pandajs.help();
 pandajs[command](process.cwd(), {
     param: process.argv[3]
 }, function(err) {
-    if (err) pandajs.help();
+    if (err) console.log(err.error);
 });
