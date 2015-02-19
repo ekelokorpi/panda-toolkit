@@ -1,5 +1,7 @@
-var build = function(path, option, callback) {
-    path = path || process.cwd();
+var build = function(dir, options, callback) {
+    if (!dir) return callback(true);
+    options = options || {};
+
     var UglifyJS = require('uglify-js');
     var fs = require('fs');
     var i, file, size, result, output, totalSize = 0;
@@ -13,7 +15,7 @@ var build = function(path, option, callback) {
 
     // Read config file
     try {
-        require(path + '/' + configFile);
+        require(dir + '/' + configFile);
         console.log('Using config ' + configFile.file);
         if (pandaConfig.sourceFolder) {
             sourceFolder = pandaConfig.sourceFolder;
@@ -28,7 +30,7 @@ var build = function(path, option, callback) {
         console.log('Using default config');
     }
 
-    var dir = path + '/' + sourceFolder + '/';
+    var srcDir = dir + '/' + sourceFolder + '/';
 
     global['game'] = {};
     game.modules = ['engine/core.js'];
@@ -44,7 +46,7 @@ var build = function(path, option, callback) {
             name = modules[i].replace(/\./g, '/') + '.js';
             if (game.modules.indexOf(name) === -1) {
                 game.modules.push(name);
-                require(dir + name);
+                require(srcDir + name);
             }
         }
         return game;
@@ -53,7 +55,7 @@ var build = function(path, option, callback) {
 
     // Get core modules
     pandaConfig.ignoreModules = pandaConfig.ignoreModules || [];
-    var pandaCore = require(dir + 'engine/core.js');
+    var pandaCore = require(srcDir + 'engine/core.js');
     game.coreModules = pandaCore.coreModules;
 
     // Ignore debug module
@@ -73,12 +75,12 @@ var build = function(path, option, callback) {
 
     // Process main game module
     var gameMainModule = pandaConfig.gameMainModule || 'main';
-    require(dir + 'game/' + gameMainModule + '.js');
+    require(srcDir + 'game/' + gameMainModule + '.js');
 
     // Include dir to modules
     for (i = 0; i < game.modules.length; i++) {
         file = game.modules[i];
-        game.modules[i] = dir + file;
+        game.modules[i] = srcDir + file;
         size = fs.statSync(game.modules[i]).size;
         totalSize += size;
         console.log(file.file + ' ' + (size.toString()).number + ' bytes');
@@ -116,12 +118,12 @@ var build = function(path, option, callback) {
     output += 'game.build=' + Date.now() + ';';
 
     // Write output file
-    fs.writeFile(path + '/' + outputFile, output, function(err) {
+    fs.writeFile(dir + '/' + outputFile, output, function(err) {
         if (err) {
             callback('Error writing file');
         }
         else {
-            var size = fs.statSync(path + '/' + outputFile).size;
+            var size = fs.statSync(dir + '/' + outputFile).size;
             var percent = Math.round((size / totalSize) * 100);
             console.log('Saved ' + outputFile.file + ' ' + (size.toString()).number + ' bytes (' + percent + '%)');
             callback();

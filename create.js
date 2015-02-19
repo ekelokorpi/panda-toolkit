@@ -1,14 +1,18 @@
-var create = function(folder, option, callback) {
-    if (!folder) return callback(true);
+var create = function(dir, options, callback) {
+    if (!dir) return callback(true);
+    options = options || {};
+
+    // TODO make sure that folder is empty
 
     var fs = require('fs');
     var download = require('download');
     var path = require('path');
 
     var tempDir = '.panda';
-    var devMode = (option === 'dev');
+    var devMode = !!options.dev;
     var engineUrl = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
     var templateUrl = 'https://github.com/ekelokorpi/panda.js-template/archive/master.zip';
+    var folder = options.param || '.';
 
     console.log('Creating new project...'.title);
     if (devMode) console.log('(develop version)');
@@ -21,7 +25,7 @@ var create = function(folder, option, callback) {
 
     function moveEngineFiles() {
         if (engineFilesToMove.length === 0) {
-            rmdir(tempDir);
+            rmdir(dir + '/' + tempDir);
             fs.mkdir(folder + '/media', function() {
                 console.log('Done'.valid);
                 callback();
@@ -30,7 +34,7 @@ var create = function(folder, option, callback) {
         }
         var file = engineFilesToMove.shift();
 
-        fs.rename(tempDir + '/' + file, folder + '/' + file, function(err) {
+        fs.rename(dir + '/' + tempDir + '/' + file, folder + '/' + file, function(err) {
             if (err) return console.log('Error moving file'.error);
 
             moveEngineFiles();
@@ -49,37 +53,45 @@ var create = function(folder, option, callback) {
         fs.rmdirSync(dir);
     };
 
-    fs.mkdir(tempDir, function(err) {
-        if (err) return console.log('Error creating temp folder'.error);
+    function createProject() {
+        fs.mkdir(folder + '/src', function(err) {
+            if (err) return console.log('Error creating src folder'.error);
+            
+            var wget = download(engineUrl, dir + '/' + tempDir, { extract: true, strip: 1 });
 
-        fs.mkdir(folder, function(err) {
-            if (err) {
-                rmdir(tempDir);
-                return console.log('Error creating project folder'.error);
-            }
+            wget.on('error', function(err) {
+                if (err) return console.log('Error downloading engine'.error);
+            });
 
-            fs.mkdir(folder + '/src', function(err) {
-                if (err) return console.log('Error creating src folder'.error);
-                
-                var wget = download(engineUrl, tempDir, { extract: true, strip: 1 });
+            wget.on('close', function() {
+                var wget = download(templateUrl, folder + '/src/game', { extract: true, strip: 1 });
 
                 wget.on('error', function(err) {
-                    if (err) return console.log('Error downloading engine'.error);
+                    if (err) return console.log('Error downloading template'.error);
                 });
 
                 wget.on('close', function() {
-                    var wget = download(templateUrl, folder + '/src/game', { extract: true, strip: 1 });
-
-                    wget.on('error', function(err) {
-                        if (err) return console.log('Error downloading template'.error);
-                    });
-
-                    wget.on('close', function() {
-                        moveEngineFiles();
-                    });
+                    moveEngineFiles();
                 });
             });
         });
+    };
+
+    fs.mkdir(dir + '/' + tempDir, function(err) {
+        if (err) return console.log('Error creating temp folder'.error);
+
+        if (folder === '.') createProject();
+        else {
+            fs.mkdir(folder, function(err) {
+                if (err) {
+                    rmdir(dir + '/' + tempDir);
+                    return console.log('Error creating project folder'.error);
+                }
+                else {
+                    createProject();
+                }
+            });
+        }
     });
 };
 

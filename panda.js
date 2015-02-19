@@ -16,6 +16,8 @@ colors.setTheme({
 
 if (!command || !pandajs[command]) return pandajs.help();
 
-pandajs[command](process.argv[3], process.argv[4], function(err) {
+pandajs[command](process.cwd(), {
+    param: process.argv[3]
+}, function(err) {
     if (err) pandajs.help();
 });
