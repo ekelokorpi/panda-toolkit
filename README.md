@@ -2,7 +2,7 @@
 
 ### Install
 
-    $ npm install -g pandatool
+    $ npm install -g pandajs
 
 ### Usage
     

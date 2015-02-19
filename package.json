@@ -6,7 +6,7 @@
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ekelokorpi/panda.js-npm.git"
+    "url": "https://github.com/ekelokorpi/panda.js-cli.git"
   },
   "license": "MIT",
   "dependencies": {
