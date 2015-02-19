@@ -1,7 +1,7 @@
 {
   "name": "pandajs",
   "version": "1.11.5",
-  "description": "Panda.js CLI",
+  "description": "Panda.js command-line interface",
   "main": "index.js",
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
   "repository": {
@@ -11,7 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "uglify-js": "~2.4.13",
-    "colors": "~0.6.2",
     "download": "^0.1.17"
   },
   "bin": {

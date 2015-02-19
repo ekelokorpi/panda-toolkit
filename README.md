@@ -1,6 +1,4 @@
-## Panda.js CLI
-
-Panda.js command-line interface.
+## Panda.js command-line interface
 
 ### Install
 

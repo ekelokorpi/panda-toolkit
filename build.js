@@ -1,22 +1,23 @@
-var build = function(dir, options, callback) {
-    if (!dir) return callback(true);
-    options = options || {};
+var build = function(dir, params, callback) {
+    console.log('Building...');
+
+    if (!dir) return callback('Directory not set');
 
     var UglifyJS = require('uglify-js');
     var fs = require('fs');
     var i, file, size, result, output, totalSize = 0;
     var configFile = 'src/game/config.js';
     var header = '// Made with Panda.js - http://www.pandajs.net';
-    var sourceFolder = 'src';
-    var outputFile = 'game.min.js';
     var defaultModules = false;
 
-    console.log('Building...'.title);
+    // Default config
+    var sourceFolder = 'src';
+    var outputFile = 'game.min.js';
 
     // Read config file
     try {
         require(dir + '/' + configFile);
-        console.log('Using config ' + configFile.file);
+        console.log('Using config ' + configFile);
         if (pandaConfig.sourceFolder) {
             sourceFolder = pandaConfig.sourceFolder;
             delete pandaConfig.sourceFolder;
@@ -26,8 +27,7 @@ var build = function(dir, options, callback) {
             delete pandaConfig.outputFile;
         }
     } catch (e) {
-        // Load default config
-        console.log('Using default config');
+        return callback('Config file not found.');
     }
 
     var srcDir = dir + '/' + sourceFolder + '/';
@@ -83,9 +83,9 @@ var build = function(dir, options, callback) {
         game.modules[i] = srcDir + file;
         size = fs.statSync(game.modules[i]).size;
         totalSize += size;
-        console.log(file.file + ' ' + (size.toString()).number + ' bytes');
+        console.log(file + ' ' + size + ' bytes');
     }
-    console.log('Total ' + (totalSize.toString()).number + ' bytes');
+    console.log('Total ' + totalSize + ' bytes');
 
     // Minify
     result = UglifyJS.minify(game.modules);
@@ -125,7 +125,7 @@ var build = function(dir, options, callback) {
         else {
             var size = fs.statSync(dir + '/' + outputFile).size;
             var percent = Math.round((size / totalSize) * 100);
-            console.log('Saved ' + outputFile.file + ' ' + (size.toString()).number + ' bytes (' + percent + '%)');
+            console.log('Saved ' + outputFile + ' ' + size + ' bytes (' + percent + '%)');
             callback();
         }
     });
