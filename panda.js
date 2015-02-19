@@ -43,7 +43,7 @@ var commands = {
 var help = function() {
     var data = require('./package.json');
 
-    console.log(data.description.title + ' ' + ('v' + data.version).number);
+    console.log(data.description.title + ' ' + (data.version).number);
     console.log('');
     console.log('Usage: ' + 'panda'.command + ' ' + '[command]'.parameter);
     console.log('');
@@ -64,7 +64,7 @@ for (var i in commands) {
     if (command) break;
 }
 
-// Default command
+// No command found, show help
 if (!command) return help();
 
 command = require('./' + command);
