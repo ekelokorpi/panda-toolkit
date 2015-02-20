@@ -1,10 +1,10 @@
 var commands = {
     build: 'Build project',
-    create: 'Create new project'
+    create: 'Create new project',
+    update: 'Update engine'
     // server: ['Start web server', 'server', 'start', 's'],
     // cache: ['Create cache manifest', 'cache', 'offline', 'c'],
     // check: ['Check code style', 'check', 'lint', 'valid', 'jscs', 'test', 'l'],
-    // update: ['Update engine', 'update', 'u'],
     // version: ['Version control', 'version', 'v'],
     // compress: ['Compress image files', 'compress', 'tinypng'],
 };

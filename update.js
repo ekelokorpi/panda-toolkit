@@ -1,64 +1,70 @@
-var fs = require('fs');
-var download = require('download');
-var path = require("path");
+var update = function(dir, params, callback) {
+    console.log('Updating engine...');
 
-// Settings
-var tempDir = '.panda';
-var arg = process.argv[3] || '';
-var devMode = (arg.indexOf('dev') !== -1);
-var url = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
+    if (!dir) return callback('Directory not set');
 
-console.log('Updating Panda.js engine...'.title);
-if (devMode) console.log('(develop version)');
+    var fs = require('fs');
+    var download = require('download');
+    var path = require('path');
 
-var filesToMove = [];
+    // Settings
+    var tempDir = path.join(dir, '.panda');
+    var devMode = (params[0] === 'dev');
+    var url = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
-function moveFiles() {
-    if (filesToMove.length === 0) {
-        rmdir(tempDir);
-        console.log('Done'.valid);
-        return;
-    }
-    var file = filesToMove.shift();
+    if (devMode) console.log('(develop version)');
 
-    fs.rename(tempDir + '/src/engine/' + file, 'src/engine/' + file, function(err) {
-        if (err) return console.log('Error moving file'.error);
+    var filesToMove = [];
 
-        moveFiles();
-    });
-};
+    function moveFiles() {
+        if (filesToMove.length === 0) {
+            rmdir(tempDir);
+            callback();
+            return;
+        }
+        var file = filesToMove.shift();
 
-function rmdir(dir) {
-    var files = fs.readdirSync(dir);
-    for (var i = 0; i < files.length; i++) {
-        var filename = path.join(dir, files[i]);
-        var stat = fs.statSync(filename);
-        
-        if (stat.isDirectory()) rmdir(filename);
-        else fs.unlinkSync(filename);
-    }
-    fs.rmdirSync(dir);
-};
+        fs.rename(path.join(tempDir, '/src/engine/', file), path.join(dir, '/src/engine/', file), function(err) {
+            if (err) return callback('Error moving file');
 
-fs.stat('src/engine', function(err) {
-    if (err) return console.log('Engine not found'.error);
-
-    fs.mkdir(tempDir, function(err) {
-        if (err) return console.log('Error creating temp dir'.error);
-
-        var wget = download(url, tempDir, { extract: true, strip: 1 });
-
-        wget.on('error', function(err) {
-            if (err) return console.log('Error downloading update'.error);
+            moveFiles();
         });
+    };
 
-        wget.on('close', function() {
-            fs.readdir(tempDir + '/src/engine', function(err, files) {
-                if (err) return console.log('Error reading temp dir'.error);
+    function rmdir(dir) {
+        var files = fs.readdirSync(dir);
+        for (var i = 0; i < files.length; i++) {
+            var filename = path.join(dir, files[i]);
+            var stat = fs.statSync(filename);
+            
+            if (stat.isDirectory()) rmdir(filename);
+            else fs.unlinkSync(filename);
+        }
+        fs.rmdirSync(dir);
+    };
 
-                filesToMove = files;
-                moveFiles();
+    fs.stat(path.join(dir, 'src/engine'), function(err) {
+        if (err) return callback('Engine not found');
+
+        fs.mkdir(tempDir, function(err) {
+            if (err) return callback('Error creating temp folder');
+
+            var wget = download(url, tempDir, { extract: true, strip: 1 });
+
+            wget.on('error', function(err) {
+                if (err) return callback('Error downloading update');
+            });
+
+            wget.on('close', function() {
+                fs.readdir(path.join(tempDir, '/src/engine'), function(err, files) {
+                    if (err) return callback('Error reading temp folder');
+
+                    filesToMove = files;
+                    moveFiles();
+                });
             });
         });
     });
-});
+};
+
+module.exports = exports = update;
