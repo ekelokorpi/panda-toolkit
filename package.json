@@ -1,12 +1,12 @@
 {
-  "name": "pandajs",
+  "name": "pandatool",
   "version": "1.11.5",
-  "description": "Panda.js command-line interface",
+  "description": "Panda Tool",
   "main": "index.js",
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ekelokorpi/panda.js-cli.git"
+    "url": "https://github.com/ekelokorpi/panda.js-toolkit.git"
   },
   "license": "MIT",
   "dependencies": {

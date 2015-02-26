@@ -1,9 +1,32 @@
-## Panda.js command-line interface
+# Panda Toolkit
 
-### Install
+### Command-line interface
 
-    $ npm install -g pandajs
+With Panda Toolkit, you can get most out of your game development.
 
-### Usage
+## Install
+
+Make sure you got [Node.js](http://nodejs.org/) installed first.
+
+    $ sudo npm install -g pandatool
+
+## Usage
     
     $ panda <command> [options]
+
+## Commands
+
+- `build` Build project
+- `create [name]` Create new project
+- `update` Update engine
+
+## Example
+
+	$ panda create MyPandaGame
+	Creating new project...
+	Done
+	$ cd MyPandaGame
+	$ panda build
+	Building project...
+
+Now you will have minified `game.min.js` file in your project folder.

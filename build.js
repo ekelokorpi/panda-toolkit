@@ -1,5 +1,5 @@
 var build = function(dir, params, callback) {
-    console.log('Building...');
+    console.log('Building project...');
 
     if (!dir) return callback('Directory not set');
 
@@ -56,7 +56,7 @@ var build = function(dir, params, callback) {
     // Get core modules
     pandaConfig.ignoreModules = pandaConfig.ignoreModules || [];
     var pandaCore = require(srcDir + 'engine/core.js');
-    game.coreModules = pandaCore.coreModules;
+    game.coreModules = pandaCore._coreModules || pandaCore.coreModules;
 
     // Ignore debug module
     var debugIndex = pandaConfig.ignoreModules.indexOf('engine.debug');
