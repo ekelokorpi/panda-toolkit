@@ -2,7 +2,7 @@
 
 ### Command-line interface
 
-With Panda Toolkit, you can get most out of your game development.
+With Panda Toolkit, you can build and manage your game projects.
 
 ## Install
 
