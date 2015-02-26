@@ -31,7 +31,7 @@ Make sure you got [Node.js](http://nodejs.org/) installed first.
 
 Now you will have minified `game.min.js` file in your project folder.
 
-You can also use Panda Toolkit as module:
+You can also use Panda Toolkit as npm module:
 
 ```javascript
 var panda = require('pandatool');
