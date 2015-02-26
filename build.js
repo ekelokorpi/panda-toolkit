@@ -1,4 +1,4 @@
-var build = function(dir, params, callback) {
+var build = function(dir, callback) {
     console.log('Building project...');
 
     if (!dir) return callback('Directory not set');

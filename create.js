@@ -1,4 +1,4 @@
-var create = function(dir, params, callback) {
+var create = function(dir, callback, params) {
     console.log('Creating new project...');
 
     if (!dir) return callback('Directory not set');

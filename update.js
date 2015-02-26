@@ -1,4 +1,4 @@
-var update = function(dir, params, callback) {
+var update = function(dir, callback, params) {
     console.log('Updating engine...');
 
     if (!dir) return callback('Directory not set');

@@ -17,8 +17,8 @@ Make sure you got [Node.js](http://nodejs.org/) installed first.
 ## Commands
 
 - `build` Build project
-- `create [name]` Create new project
-- `update` Update engine
+- `create <name> [dev]` Create new project. Use `dev` parameter for develop version
+- `update [dev]` Update engine. Use `dev` parameter for develop version
 
 ## Example
 
@@ -30,3 +30,13 @@ Make sure you got [Node.js](http://nodejs.org/) installed first.
 	Building project...
 
 Now you will have minified `game.min.js` file in your project folder.
+
+You can also use Panda Toolkit as module:
+
+```javascript
+var panda = require('pandatool');
+
+panda.build('/path/to/MyPandaGame', function(err) {
+    if (err) console.log(err);
+});
+```

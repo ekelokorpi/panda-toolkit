@@ -9,7 +9,7 @@ var commands = {
     // compress: ['Compress image files', 'compress', 'tinypng'],
 };
 
-var pandajs = {
+var panda = {
 	help: function() {
 		var data = require('./package.json');
 		console.log(data.description + ' ' + data.version);
@@ -24,7 +24,7 @@ var pandajs = {
 };
 
 for (var name in commands) {
-	pandajs[name] = require('./' + name);
+	panda[name] = require('./' + name);
 }
 
-module.exports = exports = pandajs;
+module.exports = exports = panda;
