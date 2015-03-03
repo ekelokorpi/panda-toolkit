@@ -59,8 +59,11 @@ var build = function(dir, callback) {
     game.coreModules = pandaCore._coreModules || pandaCore.coreModules;
 
     // Ignore debug module
-    var debugIndex = pandaConfig.ignoreModules.indexOf('engine.debug');
-    if (debugIndex === -1) pandaConfig.ignoreModules.push('engine.debug');
+    var coreVersion = parseFloat(pandaCore.version);
+    if (coreVersion >= 1.14) {
+        var debugIndex = pandaConfig.ignoreModules.indexOf('engine.debug');
+        if (debugIndex === -1) pandaConfig.ignoreModules.push('engine.debug');
+    }
 
     // Remove ignored modules
     for (var i = 0; i < pandaConfig.ignoreModules.length; i++) {
