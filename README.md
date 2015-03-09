@@ -1,6 +1,6 @@
 # Panda Toolkit
 
-### Command-line interface for managing your game projects
+### Command-line interface for managing your projects
 
 ## Install
 
@@ -17,3 +17,14 @@ Make sure you have [Node.js](http://nodejs.org/) installed first, then type:
 - `build` Build project
 - `create <name> [dev]` Create new project. Use `dev` parameter for develop version
 - `update [dev]` Update engine. Use `dev` parameter for develop version
+
+## Support
+
+- [Panda.js forum](http://www.html5gamedevs.com/forum/19-pandajs/)
+- [Panda Toolkit chat](https://gitter.im/ekelokorpi/panda.js-toolkit)
+
+## License
+
+Panda Toolkit is released under the [MIT License](http://opensource.org/licenses/MIT).
+
+Financed by [Yleisradio](http://en.wikipedia.org/wiki/Yle).
