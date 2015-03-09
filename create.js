@@ -12,7 +12,7 @@ var create = function(dir, callback, params) {
     var tempDir = '.panda';
     var devMode = (params[1] === 'dev');
     var engineUrl = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
-    var templateUrl = 'https://github.com/ekelokorpi/panda.js-template/archive/master.zip';
+    var templateUrl = 'https://github.com/ekelokorpi/panda.js-template/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
     if (devMode) console.log('(develop version)');
 
