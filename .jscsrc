@@ -1,5 +1,6 @@
 // JavaScript Code Style config for Panda.js
 {
+    "additionalRules": ["rules/*.js"],
     "requireSpaceAfterKeywords": [
         "if",
         "else",
@@ -37,7 +38,7 @@
         "<",
         "<="
     ],
-    "disallowLeftStickedOperators": [
+    "requireSpaceBeforeBinaryOperators": [
         "?",
         "+",
         "*",
@@ -52,7 +53,7 @@
         "<=",
         "||"
     ],
-    "disallowRightStickedOperators": [
+    "requireSpaceAfterBinaryOperators": [
         "?",
         "+",
         "*",
@@ -104,7 +105,6 @@
     ],
     "requireTypeCoercion": true,
     "validateIndentationInsideBody": 4,
-    "additionalRules": ["rules/*.js"],
     "excludeFiles": ["src/engine/pixi.js"],
     "disallowNewlinesBeforeCurlyBraces": [
         ")"

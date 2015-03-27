@@ -17,6 +17,7 @@ Make sure you have [Node.js](http://nodejs.org/) installed first, then type:
 - `build` Build project
 - `create <name> [dev]` Create new project. Use `dev` parameter for develop version
 - `update [dev]` Update engine. Use `dev` parameter for develop version
+- `lint` Validate your code.
 
 ## Support
 

@@ -1,4 +1,4 @@
-var build = function(dir, callback) {
+module.exports = exports = function(dir, callback, arguments) {
     console.log('Building project...');
 
     if (!dir) return callback('Directory not set');
@@ -7,12 +7,13 @@ var build = function(dir, callback) {
     var fs = require('fs');
     var i, file, size, result, output, totalSize = 0;
     var configFile = 'src/game/config.js';
-    var header = '// Made with Panda.js - http://www.pandajs.net';
+    var header = '// Made with Panda Engine - http://www.pandajs.net';
     var defaultModules = false;
+    var target = arguments[0] || 'game';
 
     // Default config
     var sourceFolder = 'src';
-    var outputFile = 'game.min.js';
+    var outputFile = target === 'game' ? 'game.min.js' : 'panda.min.js';
 
     // Read config file
     try {
@@ -77,8 +78,10 @@ var build = function(dir, callback) {
     }
 
     // Process main game module
-    var gameMainModule = pandaConfig.gameMainModule || 'main';
-    require(srcDir + 'game/' + gameMainModule + '.js');
+    if (target === 'game') {
+        var gameMainModule = pandaConfig.gameMainModule || 'main';
+        require(srcDir + 'game/' + gameMainModule + '.js');
+    }
 
     // Include dir to modules
     for (i = 0; i < game.modules.length; i++) {
@@ -97,7 +100,6 @@ var build = function(dir, callback) {
     output = header + '\n';
 
     // Clean config
-    delete pandaConfig.ignoreModules;
     delete pandaConfig.debug;
     delete pandaConfig.debugDraw;
 
@@ -123,7 +125,7 @@ var build = function(dir, callback) {
     // Write output file
     fs.writeFile(dir + '/' + outputFile, output, function(err) {
         if (err) {
-            callback('Error writing file');
+            callback('Error writing file ' + outputFile);
         }
         else {
             var size = fs.statSync(dir + '/' + outputFile).size;
@@ -133,5 +135,3 @@ var build = function(dir, callback) {
         }
     });
 };
-
-module.exports = exports = build;

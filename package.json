@@ -10,8 +10,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "uglify-js": "~2.4.13",
-    "download": "^0.1.17"
+    "download": "^0.1.17",
+    "jscs": "^1.11.3",
+    "uglify-js": "~2.4.13"
   },
   "bin": {
     "panda": "./panda.js"
