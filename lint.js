@@ -20,11 +20,6 @@ var lint = function(dir, callback, params) {
     var config = loader.load('.jscsrc', __dirname);
     if (!config) return callback('Error loading config file.');
 
-    // Include dir in exclude files
-    for (var i = 0; i < config.excludeFiles.length; i++) {
-        config.excludeFiles[i] = dir + '/' + config.excludeFiles[i];
-    }
-
     checker.registerDefaultRules();
     checker.configure(config);
 
@@ -54,6 +49,7 @@ var lint = function(dir, callback, params) {
     vow.all(files.map(checker.checkPath, checker)).then(function(results) {
         parseResults(results);
     }).fail(function(e) {
+        console.log(e);
         callback('Error reading files.');
     });
 };

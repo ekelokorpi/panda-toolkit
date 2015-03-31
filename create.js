@@ -19,12 +19,14 @@ var create = function(dir, callback, params) {
     var engineFilesToMove = [
         'src/engine',
         'index.html',
-        'dev.html'
+        'release.html'
     ];
+
+    var tempPath = dir + '/' + tempDir;
 
     function moveEngineFiles() {
         if (engineFilesToMove.length === 0) {
-            rmdir(dir + '/' + tempDir);
+            removeTempDir();
             fs.mkdir(dir + '/' + folder + '/media', function() {
                 callback();
             });
@@ -32,11 +34,20 @@ var create = function(dir, callback, params) {
         }
         var file = engineFilesToMove.shift();
 
-        fs.rename(dir + '/' + tempDir + '/' + file, dir + '/' + folder + '/' + file, function(err) {
-            if (err) return callback('Error moving file');
+        var from = dir + '/' + tempDir + '/' + file;
+        var to = dir + '/' + folder + '/' + file;
+        fs.rename(from, to, function(err) {
+            if (err) {
+                removeTempDir();
+                return callback('Error moving file from ' + from + ' to ' + to);
+            }
 
             moveEngineFiles();
         });
+    };
+
+    function removeTempDir() {
+        rmdir(tempPath);
     };
 
     function rmdir(dir) {
@@ -79,8 +90,8 @@ var create = function(dir, callback, params) {
     };
 
     function start() {
-        fs.mkdir(dir + '/' + tempDir, function(err) {
-            if (err) return callback('Error creating temp folder');
+        fs.mkdir(tempPath, function(err) {
+            if (err) return callback('Error creating temp folder at ' + tempPath);
 
             if (folder === '.') {
                 createProject();

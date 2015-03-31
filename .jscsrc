@@ -1,4 +1,4 @@
-// JavaScript Code Style config for Panda.js
+// JavaScript Code Style config for Panda Engine
 {
     "additionalRules": ["rules/*.js"],
     "requireSpaceAfterKeywords": [
@@ -74,20 +74,17 @@
     "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
     "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
     "requireSpaceBeforeBinaryOperators": [
-        // "+",
         "-",
         "/",
         "*",
         "="
     ],
     "requireSpaceAfterBinaryOperators": [
-        // "+",
         "-",
         "/",
         "*",
         "="
     ],
-    // "requireCamelCaseOrUpperCaseIdentifiers": true,
     "disallowMultipleEmptyLines": true,
     "validateQuoteMarks": "'",
     "disallowMixedSpacesAndTabs": true,
@@ -95,8 +92,6 @@
     "requireKeywordsOnNewLine": [
         "else"
     ],
-    // "maximumLineLength": 200,
-    // "requireCapitalizedConstructors": true,
     "disallowYodaConditions": true,
     "disallowMultipleLineStrings": true,
     "disallowParenthesesAfterKeywords": [
@@ -105,12 +100,9 @@
     ],
     "requireTypeCoercion": true,
     "validateIndentationInsideBody": 4,
-    "excludeFiles": ["src/engine/pixi.js"],
     "disallowNewlinesBeforeCurlyBraces": [
         ")"
     ],
     "disallowMultipleSpaces": true,
-    "requireNewlineAfterBlock": true,
-    // "disallowNewlineAtFileEnd": true,
     "requireLineFeedAtFileEnd": true
 }
