@@ -13,7 +13,7 @@ module.exports = exports = function(dir, callback, arguments) {
 
     // Default config
     var sourceFolder = 'src';
-    var outputFile = target === 'game' ? 'game.min.js' : 'panda.min.js';
+    var outputFile = target === 'core' ? 'panda.min.js' : 'game.min.js';
 
     // Read config file
     try {
@@ -61,7 +61,7 @@ module.exports = exports = function(dir, callback, arguments) {
 
     // Ignore debug module
     var coreVersion = parseFloat(pandaCore.version);
-    if (coreVersion >= 1.14) {
+    if (coreVersion >= 1.14 && target !== 'core') {
         var debugIndex = pandaConfig.ignoreModules.indexOf('engine.debug');
         if (debugIndex === -1) pandaConfig.ignoreModules.push('engine.debug');
     }
@@ -97,14 +97,17 @@ module.exports = exports = function(dir, callback, arguments) {
     result = UglifyJS.minify(game.modules);
 
     // Include header
-    output = header + '\n';
+    if (target === 'core') output = '// Panda Engine ' + pandaCore.version + ' - http://www.pandajs.net\n';
+    else output = header + '\n';
 
     // Clean config
     delete pandaConfig.debug;
     delete pandaConfig.debugDraw;
+    delete pandaConfig.name;
+    delete pandaConfig.version;
 
     // Include config
-    output += 'pandaConfig=' + JSON.stringify(pandaConfig) + ';';
+    if (target !== 'core') output += 'pandaConfig=' + JSON.stringify(pandaConfig) + ';';
 
     // Include sitelock function
     if (pandaConfig.sitelock) {

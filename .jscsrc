@@ -1,6 +1,7 @@
 // JavaScript Code Style config for Panda Engine
 {
     "additionalRules": ["rules/*.js"],
+    "disallowMultipleLineBreaks": true,
     "requireSpaceAfterKeywords": [
         "if",
         "else",
@@ -15,7 +16,6 @@
     "requireSpaceBeforeBlockStatements": true,
     "requireParenthesesAroundIIFE": true,
     "requireBlocksOnNewline": true,
-    "disallowPaddingNewlinesInBlocks2": true,
     "disallowEmptyBlocks": true,
     "disallowSpacesInsideArrayBrackets": true,
     "disallowSpacesInsideParentheses": true,
@@ -79,20 +79,12 @@
         "*",
         "="
     ],
-    "requireSpaceAfterBinaryOperators": [
-        "-",
-        "/",
-        "*",
-        "="
-    ],
-    "disallowMultipleEmptyLines": true,
     "validateQuoteMarks": "'",
     "disallowMixedSpacesAndTabs": true,
     "allowTrailingWhitespaceOnEmptyLines": true,
     "requireKeywordsOnNewLine": [
         "else"
     ],
-    "disallowYodaConditions": true,
     "disallowMultipleLineStrings": true,
     "disallowParenthesesAfterKeywords": [
         "typeof",
