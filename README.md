@@ -1,6 +1,6 @@
 # Panda Toolkit
 
-### Command-line interface for Panda projects
+### Command-line interface for Panda Engine projects
 
 ## Install
 
@@ -26,6 +26,5 @@ Make sure you have [Node.js](http://nodejs.org/) installed first, then type:
 
 ## License
 
-Panda Toolkit is released under the [MIT License](http://opensource.org/licenses/MIT).
-
-Financed by [Yleisradio](http://en.wikipedia.org/wiki/Yle).
+- Released under the [MIT License](http://opensource.org/licenses/MIT)
+- Financed by [Yleisradio](http://en.wikipedia.org/wiki/Yle)
