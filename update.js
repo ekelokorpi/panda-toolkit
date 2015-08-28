@@ -4,30 +4,30 @@ var update = function(dir, callback, params) {
     if (!dir) return callback('Directory not set');
 
     var fs = require('fs');
+    var mv = require('mv');
     var download = require('download');
     var path = require('path');
 
     // Settings
     var tempDir = path.join(dir, '.panda');
     var devMode = (params[0] === 'dev');
-    var url = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
+    var url = 'https://github.com/ekelokorpi/panda.js-engine/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
     if (devMode) console.log('(develop version)');
 
-    var filesToMove = [];
+    rmdir(tempDir);
 
     function moveFiles() {
-        if (filesToMove.length === 0) {
+        var from = path.join(tempDir, '/src/engine');
+        var to = path.join(dir, '/src/engine');
+
+        rmdir(to);
+
+        mv(from, to, { mkdirp: true }, function(err) {
+            if (err) return callback('Error moving files');
+
             rmdir(tempDir);
             callback();
-            return;
-        }
-        var file = filesToMove.shift();
-
-        fs.rename(path.join(tempDir, '/src/engine/', file), path.join(dir, '/src/engine/', file), function(err) {
-            if (err) return callback('Error moving file');
-
-            moveFiles();
         });
     };
 
@@ -56,12 +56,7 @@ var update = function(dir, callback, params) {
             });
 
             wget.on('close', function() {
-                fs.readdir(path.join(tempDir, '/src/engine'), function(err, files) {
-                    if (err) return callback('Error reading temp folder');
-
-                    filesToMove = files;
-                    moveFiles();
-                });
+                moveFiles();
             });
         });
     });

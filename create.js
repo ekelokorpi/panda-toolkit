@@ -12,14 +12,13 @@ var create = function(dir, callback, params) {
     var tempDir = '.panda';
     var devMode = (params[1] === 'dev');
     var engineUrl = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
-    var templateUrl = 'https://github.com/ekelokorpi/panda.js-template/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
     if (devMode) console.log('(develop version)');
 
     var engineFilesToMove = [
         'src/engine',
-        'index.html',
-        'release.html'
+        'src/game',
+        'index.html'
     ];
 
     var tempPath = dir + '/' + tempDir;
@@ -76,15 +75,7 @@ var create = function(dir, callback, params) {
             });
 
             wget.on('close', function() {
-                var wget = download(templateUrl, dir + '/' + folder + '/src/game', { extract: true, strip: 1 });
-
-                wget.on('error', function(err) {
-                    if (err) return callback('Error downloading template');
-                });
-
-                wget.on('close', function() {
-                    moveEngineFiles();
-                });
+                moveEngineFiles();
             });
         });
     };
@@ -113,9 +104,7 @@ var create = function(dir, callback, params) {
     if (folder === '.') {
         fs.readdir(dir, function(err, files) {
             if (files.length > 0) callback('Project folder must be empty');
-            else {
-                start();
-            }
+            else start();
         });
     }
     else {

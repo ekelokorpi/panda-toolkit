@@ -1,6 +1,6 @@
 {
   "name": "pandatool",
-  "version": "1.12.3",
+  "version": "2.0.0",
   "description": "Panda Toolkit",
   "main": "index.js",
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.pandajs.net/)",
@@ -12,6 +12,7 @@
   "dependencies": {
     "download": "^0.1.17",
     "jscs": "1.12.0",
+    "mv": "^2.1.1",
     "uglify-js": "~2.4.13"
   },
   "bin": {

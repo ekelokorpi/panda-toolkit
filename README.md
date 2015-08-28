@@ -1,6 +1,6 @@
 # Panda Toolkit
 
-### Command-line interface for Panda Engine projects
+### Command-line interface for Panda projects
 
 ## Install
 
