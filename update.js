@@ -32,7 +32,13 @@ var update = function(dir, callback, params) {
     };
 
     function rmdir(dir) {
-        var files = fs.readdirSync(dir);
+        try {
+            var files = fs.readdirSync(dir);
+        }
+        catch (e) {
+            return;
+        }
+        
         for (var i = 0; i < files.length; i++) {
             var filename = path.join(dir, files[i]);
             var stat = fs.statSync(filename);
