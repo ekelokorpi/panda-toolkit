@@ -4,6 +4,7 @@ module.exports = exports = function(dir, callback, arguments) {
     if (!dir) return callback('Directory not set');
 
     var UglifyJS = require('uglify-js');
+    var recursiveReadSync = require('recursive-readdir-sync');
     var fs = require('fs');
 
     try {
@@ -54,12 +55,12 @@ module.exports = exports = function(dir, callback, arguments) {
     };
 
     // Read game files
-    var gameFiles = fs.readdirSync(dir + '/src/game/');
+    var gameFiles = recursiveReadSync(dir + '/src/game/');
 
     // Parse game files
     game.curDir = 'game';
     for (var i = 0; i < gameFiles.length; i++) {
-        require(dir + '/src/game/' + gameFiles[i]);
+        require(gameFiles[i]);
     }
 
     if (target === 'core') game.modules.length = 0;
