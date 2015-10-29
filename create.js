@@ -1,9 +1,8 @@
 var create = function(dir, callback, params) {
-    console.log('Creating new project...');
-
     if (!dir) return callback('Directory not set');
     var folder = params[0];
     if (!folder) return callback('Folder not set');
+    console.log('Creating project ' + folder);
 
     var fs = require('fs');
     var download = require('download');
@@ -17,6 +16,7 @@ var create = function(dir, callback, params) {
 
     var engineFilesToMove = [
         'src/engine',
+        'media',
         'src/game',
         'index.html'
     ];
@@ -26,9 +26,7 @@ var create = function(dir, callback, params) {
     function moveEngineFiles() {
         if (engineFilesToMove.length === 0) {
             removeTempDir();
-            fs.mkdir(dir + '/' + folder + '/media', function() {
-                callback();
-            });
+            callback();
             return;
         }
         var file = engineFilesToMove.shift();
@@ -101,15 +99,10 @@ var create = function(dir, callback, params) {
         });
     };
 
-    if (folder === '.') {
-        fs.readdir(dir, function(err, files) {
-            if (files.length > 0) callback('Project folder must be empty');
-            else start();
-        });
-    }
-    else {
-        start();
-    }
+    fs.readdir(dir + '/' + folder, function(err, files) {
+        if (files && files.length > 0) callback('Project folder already exists');
+        else start();
+    });
 };
 
 module.exports = exports = create;

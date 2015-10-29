@@ -6,5 +6,4 @@ if (!pandajs[command]) command = 'help';
 
 pandajs[command](process.cwd(), function(err) {
     if (err) console.log(err);
-    else console.log('Done');
 }, process.argv.splice(3));
