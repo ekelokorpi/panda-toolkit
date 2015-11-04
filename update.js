@@ -50,7 +50,7 @@ var update = function(dir, callback, params) {
     };
 
     fs.stat(path.join(dir, 'src/engine'), function(err) {
-        if (err) return callback('Engine not found');
+        if (err) return callback('Not valid project folder');
 
         fs.mkdir(tempDir, function(err) {
             if (err) return callback('Error creating temp folder');
