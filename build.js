@@ -50,7 +50,7 @@ module.exports = exports = function(dir, callback, arguments) {
     };
 
     // Read config
-    require(dir + '/src/game/config.js');
+    game.config = require(dir + '/src/game/config.js');
 
     // Clean config
     delete game.config.debug;
@@ -67,8 +67,8 @@ module.exports = exports = function(dir, callback, arguments) {
 
     // Parse engine files
     game.curDir = 'engine';
-    for (var i = 0; i < pandaCore._coreModules.length; i++) {
-        var file = pandaCore._coreModules[i].replace(/\./g, '/');
+    for (var i = 0; i < pandaCore.coreModules.length; i++) {
+        var file = pandaCore.coreModules[i].replace(/\./g, '/');
         require(dir + '/src/' + file);
     }
 
