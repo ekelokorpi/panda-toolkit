@@ -11,7 +11,7 @@ var update = function(dir, callback, params) {
     // Settings
     var tempDir = path.join(dir, '.panda');
     var devMode = (params[0] === 'dev');
-    var url = 'https://github.com/ekelokorpi/panda.js-engine/archive/' + (devMode ? 'develop' : 'master') + '.zip';
+    var url = 'https://github.com/ekelokorpi/panda-engine/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
     if (devMode) console.log('(develop version)');
 

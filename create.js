@@ -2,7 +2,7 @@ var create = function(dir, callback, params) {
     if (!dir) return callback('Directory not set');
     var folder = params[0];
     if (!folder) return callback('Folder not set');
-    console.log('Creating project ' + folder);
+    console.log('Creating project ' + folder + '...');
 
     var fs = require('fs');
     var download = require('download');
@@ -10,7 +10,7 @@ var create = function(dir, callback, params) {
 
     var tempDir = '.panda';
     var devMode = (params[1] === 'dev');
-    var engineUrl = 'https://github.com/ekelokorpi/panda.js/archive/' + (devMode ? 'develop' : 'master') + '.zip';
+    var engineUrl = 'https://github.com/ekelokorpi/panda-engine/archive/' + (devMode ? 'develop' : 'master') + '.zip';
 
     if (devMode) console.log('(develop version)');
 
