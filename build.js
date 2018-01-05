@@ -19,7 +19,7 @@ module.exports = exports = function(dir, callback, arguments) {
 
     var target = arguments[0] || 'game';
     var header = '// Made with Panda 2 (Engine v' + pandaCore.version + ') - www.panda2.io\n';
-    var outputFile = target === 'core' ? 'panda.min.js' : 'game.min.js';
+    var outputFile = target === 'core' ? 'panda.min.js' : arguments[3] || 'game.min.js';
     
     global.game = {
         modules: [],
