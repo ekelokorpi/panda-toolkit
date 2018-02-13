@@ -4,7 +4,7 @@ module.exports = exports = function(dir, callback, arguments) {
     
     if (!dir) return callback('Directory not set');
 
-    var UglifyJS = require('uglify-js');
+    var UglifyJS = require('uglify-es');
     var fs = require('fs');
     var path = require('path');
     var sourceFolder = arguments[1] || 'src';
@@ -81,9 +81,19 @@ module.exports = exports = function(dir, callback, arguments) {
         game.modules[i] = path.join(dir, sourceFolder, game.modules[i]);
     }
 
+    var minifyFiles = function(files, output) {
+        output = output || '';
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var code = fs.readFileSync(file, 'utf8');
+            var result = UglifyJS.minify(code);
+            output += result.code;
+        }
+        return output;
+    }
+
     // Minify core
-    var result = UglifyJS.minify(game.modules);
-    var output = result.code;
+    var output = minifyFiles(game.modules);
 
     var minifyGameCode = function() {
         // Remove engine modules and include dir in game modules
@@ -97,8 +107,7 @@ module.exports = exports = function(dir, callback, arguments) {
         }
 
         // Minify game code
-        var result = UglifyJS.minify(game.modules);
-        output += result.code;
+        output += minifyFiles(game.modules);
 
         writeOutput();
     };
