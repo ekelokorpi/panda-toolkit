@@ -1,6 +1,6 @@
 {
   "name": "panda-toolkit",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Panda Toolkit",
   "main": "index.js",
   "author": "Eemeli Kelokorpi <eemeli.kelokorpi@gmail.com> (http://www.panda2.io)",
@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "download": "^0.1.17",
+    "htmlparser": "^1.7.7",
     "jscs": "1.12.0",
     "mv": "^2.1.1",
     "uglify-es": "^3.3.10",
