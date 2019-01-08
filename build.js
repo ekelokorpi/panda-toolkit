@@ -96,9 +96,11 @@ module.exports = exports = function(dir, callback, arguments) {
         delete game.config.version;
         game.config.ignoreModules = game.config.ignoreModules || [];
 
-        // Skip debug module
-        if (game.config.ignoreModules.indexOf('engine.debug') === -1) {
-            game.config.ignoreModules.push('engine.debug');
+        if (target !== 'core') {
+            // Skip debug module
+            if (game.config.ignoreModules.indexOf('engine.debug') === -1) {
+                game.config.ignoreModules.push('engine.debug');
+            }
         }
 
         // Parse engine files
@@ -142,8 +144,10 @@ module.exports = exports = function(dir, callback, arguments) {
                 }
             }
 
-            // Minify game code
-            output += minifyFiles(game.modules);
+            if (target !== 'core') {
+                // Minify game code
+                output += minifyFiles(game.modules);
+            }
 
             writeOutput();
         };
@@ -161,11 +165,13 @@ module.exports = exports = function(dir, callback, arguments) {
             });
         };
 
-        // Include header
-        output = header + output;
+        if (target !== 'core') {
+            // Include header
+            output = header + output;
 
-        // Include config
-        output += 'game.config=' + JSON.stringify(game.config) + ';';
+            // Include config
+            output += 'game.config=' + JSON.stringify(game.config) + ';';
+        }
 
         game.modules = gameModules;
         minifyGameCode();
