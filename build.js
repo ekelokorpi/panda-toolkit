@@ -93,7 +93,6 @@ module.exports = exports = function(dir, callback, arguments) {
         // Clean config
         delete game.config.debug;
         delete game.config.name;
-        delete game.config.version;
         game.config.ignoreModules = game.config.ignoreModules || [];
 
         if (target !== 'core') {
